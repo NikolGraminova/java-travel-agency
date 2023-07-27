@@ -14,6 +14,7 @@ La classe Vacanza espone un metodo per calcolare la durata in giorni della vacan
  */
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Holiday {
 
@@ -24,7 +25,6 @@ public class Holiday {
 
 
     // CONSTRUCTORS
-
     public Holiday(String destination, LocalDate startDate, LocalDate endDate) {
 
         // EXCEPTIONS
@@ -82,5 +82,17 @@ public class Holiday {
 
 
     // METHODS
+    public int getTotalDays(){
+        Period days = Period.between(startDate,endDate);
+        return days.getDays();
+    }
 
+    @Override
+    public String toString() {
+        return "Holiday{" +
+                "destination: '" + destination + '\'' +
+                ", startDate: " + startDate +
+                ", endDate: " + endDate +
+                '}';
+    }
 }

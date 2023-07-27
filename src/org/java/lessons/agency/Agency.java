@@ -9,8 +9,24 @@ Se la creazione della vacanza genera un errore, il programma non deve interrompe
 che permettono all’utente di capire cosa è andato storto e di ripetere l’inserimento.
  */
 
+import java.time.LocalDate;
+import java.util.Scanner;
+
 public class Agency {
     public static void main(String[] args) {
+
+        Scanner scan = new Scanner(System.in);
+        System.out.println("*** WELCOME TO JAVA TRAVEL AGENCY ***");
+        System.out.print("Enter holiday destination: ");
+        String destination = scan.nextLine();
+        System.out.print("Enter start date: ");
+        LocalDate startDate = LocalDate.parse(scan.nextLine());
+        System.out.print("Enter end date: ");
+        LocalDate endDate = LocalDate.parse(scan.nextLine());
+
+        Holiday userHoliday = new Holiday(destination,startDate, endDate);
+        System.out.println("You booked a holiday" + " of " + userHoliday.getTotalDays() + " days to " + destination  + ", from " +  startDate + " to " + endDate + ".");
+
 
     }
 }
