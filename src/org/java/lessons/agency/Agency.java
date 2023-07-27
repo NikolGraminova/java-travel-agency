@@ -16,17 +16,44 @@ public class Agency {
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
-        System.out.println("*** WELCOME TO JAVA TRAVEL AGENCY ***");
-        System.out.print("Enter holiday destination: ");
-        String destination = scan.nextLine();
-        System.out.print("Enter start date: ");
-        LocalDate startDate = LocalDate.parse(scan.nextLine());
-        System.out.print("Enter end date: ");
-        LocalDate endDate = LocalDate.parse(scan.nextLine());
+        Holiday userHoliday = null;
 
-        Holiday userHoliday = new Holiday(destination,startDate, endDate);
-        System.out.println("You booked a holiday" + " of " + userHoliday.getTotalDays() + " days to " + destination  + ", from " +  startDate + " to " + endDate + ".");
+        while (userHoliday == null){
+            System.out.println("*** WELCOME TO JAVA TRAVEL AGENCY ***");
 
+            System.out.print("Enter holiday destination: ");
+            String destination = null;
+            try {
+                destination = scan.nextLine();
+            } catch (RuntimeException exception){
+                System.out.println("Invalid destination.");
+            }
 
+            System.out.print("Enter start date: ");
+            LocalDate startDate = null;
+            try{
+                startDate = LocalDate.parse(scan.nextLine());
+            } catch (RuntimeException exception){
+                System.out.println("Invalid start date.");
+            }
+
+            System.out.print("Enter end date: ");
+
+            LocalDate endDate = null;
+            try{
+                endDate = LocalDate.parse(scan.nextLine());
+            } catch (RuntimeException exception){
+                System.out.println("Invalid holiday parameters. Try again!");
+            }
+
+            try{
+                userHoliday = new Holiday(destination, startDate,endDate);
+            } catch (RuntimeException exception){
+                System.out.println("Invalid input.");
+            }
+        }
+        System.out.println("You booked a holiday" + " of " + userHoliday.getTotalDays() + " days to " + userHoliday.getDestination()
+                + ", from " +  userHoliday.getStartDate() + " to " + userHoliday.getEndDate() + ".");
+        scan.close();
     }
 }

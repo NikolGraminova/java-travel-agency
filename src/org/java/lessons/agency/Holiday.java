@@ -25,10 +25,10 @@ public class Holiday {
 
 
     // CONSTRUCTORS
-    public Holiday(String destination, LocalDate startDate, LocalDate endDate) {
+    public Holiday(String destination, LocalDate startDate, LocalDate endDate) throws RuntimeException{
 
         // EXCEPTIONS
-        if (destination == null){
+        if (destination == null || destination.isEmpty()){
             throw new RuntimeException("Destination can't be null.");
         }
         if (startDate == null || startDate.isBefore(LocalDate.now())){
@@ -58,22 +58,23 @@ public class Holiday {
         return endDate;
     }
 
+
     //SETTERS
-    public void setDestination(String destination) {
-        if (destination == null){
+    public void setDestination(String destination) throws RuntimeException {
+        if (destination == null || destination.isEmpty()){
             throw new RuntimeException("Destination can't be null.");
         }
         this.destination = destination;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(LocalDate startDate) throws RuntimeException{
         if (startDate == null || startDate.isBefore(LocalDate.now())){
             throw new RuntimeException("Date can't be null or in the past.");
         }
         this.startDate = startDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(LocalDate endDate) throws RuntimeException{
         if (endDate == null || endDate.isBefore(startDate)){
             throw new RuntimeException("Date can't be null or before start date.");
         }
